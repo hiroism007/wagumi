@@ -8,7 +8,7 @@
     "splitFiles": true
   },
   "order": [0, 1, 3, 2],
-  "outputPath": "/ghq/github.com/wagumi/wagumi/generated/",
+  "outputPath": "/github.com/wagumi/wagumi/output/",
   "useCustomNames": 0,
   "weights": {
     "Wagumi.png": "10",
