@@ -7,7 +7,7 @@
     "name": "",
     "splitFiles": true
   },
-  "order": [0, 1, 2, 3],
+  "order": [0, 1, 3, 2],
   "outputPath": "/ghq/github.com/wagumi/wagumi/generated/",
   "useCustomNames": 0,
   "weights": {
