@@ -7,13 +7,20 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
 contract NFT is ERC721Enumerable, ReentrancyGuard, Ownable {
   using Counters for Counters.Counter;
 
-  constructor(string memory customBaseURI_) ERC721("Wagumi Cats", "WAGUMI") {
+  constructor(string memory customBaseURI_, bytes32 merkleRoot_)
+    ERC721("Wagumi Cats", "WAGUMI")
+  {
     customBaseURI = customBaseURI_;
+    root = merkleRoot_;
   }
+
+  /** WHITELIST MARKLE TREE ROOT **/
+  bytes32 public immutable root;
 
   /** MINTING LIMITS **/
 
@@ -67,6 +74,15 @@ contract NFT is ERC721Enumerable, ReentrancyGuard, Ownable {
 
   function _baseURI() internal view virtual override returns (string memory) {
     return customBaseURI;
+  }
+
+  /** WHITELIST MERKLE PROOF VERIFICATION */
+  function _verify(bytes32 leaf, bytes32[] memory proof)
+    internal
+    view
+    returns (bool)
+  {
+    return MerkleProof.verify(proof, root, leaf);
   }
 }
 
